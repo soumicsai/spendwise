@@ -1,0 +1,14 @@
+ExportComboBox {
+    background-color: #000000;
+    border-radius: 10px;
+    border: 2px solid gray;
+    padding: 1px 18px 1px 3px;
+    color: #ffffff
+}
+ExportComboBox:hover {
+    background-color: #f0f0f0;
+}
+
+QLabel {
+    color: #FFFFFF
+}

@@ -1,0 +1,23 @@
+ComboBoxWithoutArrow {
+    background-color: #3498db;
+    border-radius: 10px;
+    border: 2px solid gray;
+    padding: 1px 18px 1px 3px;
+    color: #ffffff
+
+}
+ComboBoxWithoutArrow:hover{
+    background-color: #2980b9;
+}
+QPushButton {
+                background-color: #3498db;
+                color: #ffffff;
+                border: none;
+                padding: 5px 7px;
+                font-size: 16px;
+                border-radius: 10px;
+            }
+
+QPushButton:hover {
+                background-color: #2980b9;
+            }

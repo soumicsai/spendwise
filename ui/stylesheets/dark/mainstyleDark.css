@@ -1,0 +1,73 @@
+QPushButton {
+                background-color: grey;
+                color: white;
+                border: none;
+                padding: 10px;
+                font-size: 16px;
+                border-radius: 10px;
+            }
+
+QPushButton:hover {
+                background-color: lightgrey;
+            }
+
+QWidget {
+                border-color: black;
+            }
+
+QTabBar::tab {
+                background-color: #000;  /* Tab background color */
+                color: #fff;  /* Tab text color */
+
+            }
+
+QTabWidget::pane {
+            border: 1px solid #ccc;
+            border-top: none;
+            background-color: #000;
+            }
+
+QTabBar::tab:selected {
+            background-color: #000;  /* Selected tab background color */
+            color: #2980b9;  /* Selected tab text color */
+            }
+
+QLabel {
+        color: white;
+        }
+QScrollArea {
+    background-color: #000000; /* Background color */
+}
+
+/* Style the viewport inside the QScrollArea */
+QScrollArea QWidget#viewport {
+    background-color: #000000; /* Background color */
+}
+QScrollBar{
+    background-color: black;
+}
+
+QScrollBar:vertical {
+    background: black;  /* Background color */
+    width: 15px;  /* Width of the scrollbar */
+    border-radius: 7px;  /* Border radius to make it rounded */
+}
+
+
+QScrollBar::handle:vertical {
+    background: #fff;  /* Color of the handle */
+    min-height: 20px;  /* Minimum height of the handle */
+    border-radius: 7px;  /* Border radius to make it rounded */
+}
+
+QScrollBar:horizontal {
+    background: black;  /* Background color */
+    height: 15px;  /* Width of the scrollbar */
+    border-radius: 7px;  /* Border radius to make it rounded */
+}
+
+QScrollBar::handle:horizontal {
+    background: #fff;  /* Color of the handle */
+    min-width: 20px;  /* Minimum height of the handle */
+    border-radius: 7px;  /* Border radius to make it rounded */
+}

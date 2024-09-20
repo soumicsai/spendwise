@@ -1,0 +1,33 @@
+            QPushButton {
+                background-color: #3498db;
+                color: #ffffff;
+                border: none;
+                padding: 10px;
+                font-size: 16px;
+                border-radius: 10px;
+            }
+
+            QPushButton:hover {
+                background-color: #2980b9;
+            }
+
+            QProgressBar {
+                background-color: #3498db;
+            }
+
+            QTabBar::tab {
+                background-color: #fff;  /* Tab background color */
+                color: #000;  /* Tab text color */
+
+            }
+
+             QTabWidget::pane {
+                border: 1px solid #ccc;
+                border-top: none;
+                background-color: #fff;
+            }
+
+            QTabBar::tab:selected {
+                background-color: #fff;  /* Selected tab background color */
+                color: #2980b9;  /* Selected tab text color */
+            }

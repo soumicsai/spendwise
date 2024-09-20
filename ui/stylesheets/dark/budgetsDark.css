@@ -1,0 +1,28 @@
+QProgressBar {
+        border: 2px solid white;
+        border-radius: 5px;
+        background-color: #000000;
+        text-align: center;
+    }
+Qlabel {
+    color: #f0f0f0;
+}
+QGroupBox {
+    color: white;
+    background-color: black;
+}
+QProgressBar::chunk {
+
+    background-color: black;
+    qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(255, 255, 255, 255), stop:0.499 rgba(255, 255, 255, 255), stop:0.5 rgba(200, 184, 255, 255), stop:1 rgba(200, 184, 255, 255));
+
+}
+
+QWidget QScrollArea {
+    background-color: #000000; /* Background color */
+}
+
+/* Style the viewport inside the QScrollArea */
+QWidget QScrollArea QWidget#viewport {
+    background-color: #000000; /* Background color */
+}

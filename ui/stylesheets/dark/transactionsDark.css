@@ -1,0 +1,53 @@
+ComboBoxWithoutArrow {
+    background-color: #000000;
+    border-radius: 10px;
+    border: 2px solid gray;
+    padding: 1px 18px 1px 3px;
+    color: #ffffff
+
+}
+ComboBoxWithoutArrow:hover{
+    background-color: #f0f0f0;
+}
+QPushButton {
+                background-color: gray;
+                color: black;
+                border: none;
+                padding: 5px 7px;
+                font-size: 16px;
+                border-radius: 10px;
+            }
+
+QPushButton:hover {
+                background-color: lightgrey;
+            }
+
+QScrollArea {
+    background-color: #000000;
+}
+
+QTableWidget {
+                background-color: black;
+                color: white;
+                gridline-color: white;
+            }
+
+QHeaderView {
+            background-color: black;
+            color: white;
+            }
+
+
+QHeaderView::section {
+            background-color: black;
+            color: white;
+            }
+
+QLineEdit {
+            background-color: black; /* Background color */
+            color: white; /* Text color */
+            }
+
+QLineEdit::placeholder {
+            color: gray; /* Placeholder text color */
+            }
