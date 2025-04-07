@@ -5,3 +5,4 @@ if __name__ == '__main__':
     app = QApplication([])
     window = window.MainWindow()
     app.exec_()
+

@@ -19,8 +19,8 @@ def insert_transaction(trans_data):
     finally:
         if sqliteConnection:
             sqliteConnection.close()
-            print("The SQLite connection for Insert recs is closed")
-    return
+            #print("The SQLite connection for Insert recs is closed")
+    #return
 
 
 def show_transactions():
@@ -38,7 +38,7 @@ def show_transactions():
     finally:
         if sqliteConnection:
             sqliteConnection.close()
-            print("The SQLite connection for Show Info closed")
+            #print("The SQLite connection for Show Info closed")
 
 
 def search_results(text):
@@ -56,7 +56,7 @@ def search_results(text):
     finally:
         if sqliteConnection:
             sqliteConnection.close()
-            print("The SQLite connection for Show Info closed")
+            #print("The SQLite connection for Show Info closed")
 
 
 def get_category():
@@ -73,7 +73,7 @@ def get_category():
     finally:
         if sqliteConnection:
             sqliteConnection.close()
-            print("The SQLite connection for getting categories is closed")
+            #print("The SQLite connection for getting categories is closed")
 
 
 def get_category_id(category_name):
@@ -89,7 +89,7 @@ def get_category_id(category_name):
     finally:
         if sqliteConnection:
             sqliteConnection.close()
-            print("The SQLite connection for Insert recs is closed")
+            #print("The SQLite connection for Insert recs is closed")
 
 
 def get_category_transactions(category_name):
@@ -107,7 +107,7 @@ def get_category_transactions(category_name):
     finally:
         if sqliteConnection:
             sqliteConnection.close()
-            print("The SQLite connection for getting spending per category is closed")
+            #print("The SQLite connection for getting spending per category is closed")
 
 
 def get_total_expense():
@@ -124,7 +124,7 @@ def get_total_expense():
     finally:
         if sqliteConnection:
             sqliteConnection.close()
-            print("The SQLite connection for getting total spent is closed")
+            #print("The SQLite connection for getting total spent is closed")
 
 
 def filter_transactions(period):
@@ -158,7 +158,7 @@ def filter_transactions(period):
     finally:
         if sqliteConnection:
             sqliteConnection.close()
-            print("The SQLite connection for getting total spent is closed")
+            #print("The SQLite connection for getting total spent is closed")
 
 def export_transactions():
     try:
@@ -176,5 +176,5 @@ def export_transactions():
     finally:
         if sqliteConnection:
             sqliteConnection.close()
-            print("The SQLite connection for Show Info closed")
+            #print("The SQLite connection for Show Info closed")
 

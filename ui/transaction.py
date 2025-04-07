@@ -6,7 +6,6 @@ from PyQt5.QtCore import pyqtSignal, QDate
 from db import transactiondb, tablecreate
 from ui import budgets
 
-
 class ComboBoxWithoutArrow(QComboBox):
     def __init__(self, parent=None):
         super(ComboBoxWithoutArrow, self).__init__(parent)
@@ -19,7 +18,6 @@ class ComboBoxWithoutArrow(QComboBox):
         self.addItem("Today")
         self.addItem("Last 7 Days")
         self.addItem("Last 30 Days")
-
 
 class TransactionWindow(QWidget):
     content_changed = pyqtSignal(list)
@@ -67,7 +65,6 @@ class TransactionWindow(QWidget):
         budgets.CategoryWidget.set_progress(category_Widget, category_name=category)
         self.close()
 
-
 class TransactionWidget(QWidget):
     def __init__(self):
         super().__init__()
@@ -82,7 +79,7 @@ class TransactionWidget(QWidget):
         addTransaction = QPushButton("+")
         addTransaction.clicked.connect(self.transaction_window)
         search_bar.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
-        self.transaction_list.setColumnCount(3)
+        self.transaction_list.setColumnCount(4)
         self.transaction_list.setHorizontalHeaderLabels(["Name", "Category", "Amount", "Date"])
         self.transaction_list.setSelectionBehavior(QTableWidget.SelectRows)
         transactions = transactiondb.show_transactions()

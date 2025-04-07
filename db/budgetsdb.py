@@ -19,7 +19,7 @@ def get_budget(category_name):
     finally:
         if sqliteConnection:
             sqliteConnection.close()
-            print("The SQLite connection for Insert recs is closed")
+            #print("The SQLite connection for Insert recs is closed")
 
 
 def insert_categories(category):
@@ -34,7 +34,7 @@ def insert_categories(category):
     finally:
         if sqliteConnection:
             sqliteConnection.close()
-            print("The SQLite connection for inserting category is closed")
+            #print("The SQLite connection for inserting category is closed")
 
 
 def insert_budget(category, budget):
@@ -51,7 +51,7 @@ def insert_budget(category, budget):
     finally:
         if sqliteConnection:
             sqliteConnection.close()
-            print("The SQLite connection for inserting budgets is closed")
+            #print("The SQLite connection for inserting budgets is closed")
 def total_budgets():
     try:
         sqliteConnection = sqlite3.connect(config.DATABASE_PATH)
@@ -59,6 +59,7 @@ def total_budgets():
         get_total_budget_query = f"SELECT SUM(budget) FROM budget"
         cursor.execute(get_total_budget_query)
         total_budget = cursor.fetchall()
+        print(total_budget)
         cursor.close()
         return total_budget[0][0]
     except sqlite3.Error as error:
@@ -66,6 +67,6 @@ def total_budgets():
     finally:
         if sqliteConnection:
             sqliteConnection.close()
-            print("The SQLite connection for getting total spent is closed")
+            #print("The SQLite connection for getting total spent is closed")
 
 

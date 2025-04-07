@@ -43,8 +43,8 @@ class MainWindow(QWidget):
         # Set window properties
         self.setWindowIcon(icon)
         self.setWindowTitle("Spendwise")
-        self.setGeometry(500, 500, 544, 400)
-        self.setMinimumSize(544,400)
+        self.setGeometry(500, 500, 737, 450)
+        self.setMinimumSize(737,450)
         myappid = 'mycompany.myproduct.subproduct.version'  # arbitrary string
         ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
         self.show()
