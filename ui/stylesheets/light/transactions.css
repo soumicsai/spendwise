@@ -6,6 +6,16 @@ ComboBoxWithoutArrow {
     color: #ffffff
 
 }
+QComboBox {
+    background-color: #3498db;
+    border-radius: 10px;
+    border: 2px solid gray;
+    padding: 1px 18px 1px 3px;
+    color: #ffffff
+}
+QComboBox:hover {
+    background-color: #2980b9;
+}
 ComboBoxWithoutArrow:hover{
     background-color: #2980b9;
 }

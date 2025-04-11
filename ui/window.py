@@ -1,8 +1,8 @@
-from PyQt5.QtWidgets import QTabWidget, QWidget, QVBoxLayout, QLabel, QLineEdit, QHBoxLayout, QListWidget, QScrollArea, \
-    QSizePolicy
+from PyQt5.QtWidgets import QTabWidget, QWidget, QVBoxLayout
 from PyQt5.QtGui import QPainter, QColor
-from PyQt5 import QtGui, QtWidgets
-from ui import dashboard, transaction, budgets, reports, settings
+from PyQt5 import QtGui
+from ui import dashboard, budgets, reports, settings
+from ui.transactions import transaction
 import ctypes
 
 class MainWindow(QWidget):
@@ -71,7 +71,6 @@ class MainWindow(QWidget):
                 stylesheet = file.read()
                 self.setStyleSheet(stylesheet)
                 self.mode = "Light"
-
 
 
     def paintEvent(self, event):

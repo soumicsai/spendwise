@@ -1,10 +1,10 @@
 from PyQt5.QtWidgets import (QWidget, QVBoxLayout, QLineEdit, QScrollArea,
                              QHBoxLayout, QTableWidget, QTableWidgetItem, QPushButton, QSizePolicy,
-                             QLabel, QDateEdit, QComboBox)
+                             QComboBox)
 from PyQt5 import QtGui
-from PyQt5.QtCore import pyqtSignal, QDate
-from db import transactiondb, tablecreate
-from ui import budgets
+from db import transactiondb
+from ui.transactions.transactionWindow import TransactionWindow
+
 
 class ComboBoxWithoutArrow(QComboBox):
     def __init__(self, parent=None):
@@ -19,51 +19,6 @@ class ComboBoxWithoutArrow(QComboBox):
         self.addItem("Last 7 Days")
         self.addItem("Last 30 Days")
 
-class TransactionWindow(QWidget):
-    content_changed = pyqtSignal(list)
-
-    def __init__(self):
-        super().__init__()
-        transaction_layout = QVBoxLayout()
-        categoryLabel = QLabel("Category:")
-        amountLabel = QLabel("Amount:")
-        dateLabel = QLabel("Date:")
-        okButton = QPushButton("Add Transaction")
-        self.category_edit = QComboBox()
-        category_list = transactiondb.get_category()
-        for category in category_list:
-            self.category_edit.addItem(category[0])
-        self.amount_edit = QLineEdit()
-        self.date_edit = QDateEdit()
-        today = QDate.currentDate()
-        self.date_edit.setDate(today)
-        okButton.clicked.connect(self.add_trans)
-        hlayout1 = QHBoxLayout()
-        hlayout1.addWidget(categoryLabel)
-        hlayout1.addWidget(self.category_edit)
-        hlayout2 = QHBoxLayout()
-        hlayout2.addWidget(amountLabel)
-        hlayout2.addWidget(self.amount_edit)
-        hlayout3 = QHBoxLayout()
-        hlayout3.addWidget(dateLabel)
-        hlayout3.addWidget(self.date_edit)
-        transaction_layout.addLayout(hlayout1)
-        transaction_layout.addLayout(hlayout2)
-        transaction_layout.addLayout(hlayout3)
-        transaction_layout.addWidget(okButton)
-        self.setLayout(transaction_layout)
-
-    def add_trans(self):
-        category = self.category_edit.currentText()
-        amount = self.amount_edit.text()
-        date = self.date_edit.date().toString("yyyy-MM-dd")
-        l1 = [category, amount, date]
-        tablecreate.connection_to_db()
-        transactiondb.insert_transaction(l1)
-        self.content_changed.emit(l1)
-        category_Widget = budgets.BudgetsWidget.li[category]
-        budgets.CategoryWidget.set_progress(category_Widget, category_name=category)
-        self.close()
 
 class TransactionWidget(QWidget):
     def __init__(self):
@@ -83,6 +38,12 @@ class TransactionWidget(QWidget):
         self.transaction_list.setHorizontalHeaderLabels(["Name", "Category", "Amount", "Date"])
         self.transaction_list.setSelectionBehavior(QTableWidget.SelectRows)
         transactions = transactiondb.show_transactions()
+        sort_combo = QComboBox()
+        sort_combo.addItem("Newest to Oldest")
+        sort_combo.addItem("Oldest to Newest")
+        sort_combo.addItem("Name")
+        sort_combo.addItem("Amount")
+
         if transactions:
             for i in transactions:
                 self.multi_column_list_item(i)
@@ -97,6 +58,7 @@ class TransactionWidget(QWidget):
         tab2_layout2 = QVBoxLayout()
         tab2_layout1.addWidget(search_bar)
         tab2_layout1.addWidget(self.filterButton)
+        tab2_layout1.addWidget(sort_combo)
         tab2_layout1.addWidget(addTransaction)
         tab2_layout2.addWidget(scroll_area)
         main_layout.addLayout(tab2_layout1)
@@ -109,27 +71,28 @@ class TransactionWidget(QWidget):
         records = transactiondb.filter_transactions(self.filterButton.currentText())
         if records:
             self.transaction_list.clear()
-            self.transaction_list.setHorizontalHeaderLabels(["Category", "Amount", "Date"])
+            self.transaction_list.setHorizontalHeaderLabels(["Name","Category", "Amount", "Date"])
             self.transaction_list.setRowCount(0)
             for i in records:
                 self.multi_column_list_item(i)
         else:
             self.transaction_list.clear()
-            self.transaction_list.setHorizontalHeaderLabels(["Category", "Amount", "Date"])
+            self.transaction_list.setHorizontalHeaderLabels(["Name","Category", "Amount", "Date"])
             self.transaction_list.setRowCount(0)
 
     def reinsert(self, records):
         if records:
             self.transaction_list.clear()
-            self.transaction_list.setHorizontalHeaderLabels(["Category", "Amount", "Date"])
+            self.transaction_list.setHorizontalHeaderLabels(["Name","Category", "Amount", "Date"])
             self.transaction_list.setRowCount(0)
             for i in records:
                 self.multi_column_list_item(i)
         else:
-            transactions = transactiondb.show_transactions()
-            if transactions:
-                for i in transactions:
-                    self.multi_column_list_item(i)
+            self.transaction_list.setRowCount(0)
+            #transactions = transactiondb.show_transactions()
+            #if transactions:
+                #for i in transactions:
+                    #self.multi_column_list_item(i)
 
     def search_text_changed(self, text):
         records = transactiondb.search_results(text)

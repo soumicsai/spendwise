@@ -5,13 +5,13 @@ import config
 def insert_transaction(trans_data):
     try:
         sqliteConnection = sqlite3.connect(config.DATABASE_PATH)
-        category, amount, trans_date = trans_data[0], trans_data[1], trans_data[2]
+        name, category, amount, trans_date = trans_data[0], trans_data[1], trans_data[2], trans_data[3]
         cursor = sqliteConnection.cursor()
         cursor.execute(f"SELECT category_id FROM category WHERE category='{category}'")
         category_id = cursor.fetchall()
         insert_sql = "INSERT INTO transactions (transaction_name, category_id, amount, trans_date) VALUES (?,?,?,?)"
 
-        cursor.execute(insert_sql, (int(category_id[0][0]), amount, trans_date))
+        cursor.execute(insert_sql, (name, int(category_id[0][0]), amount, trans_date))
         sqliteConnection.commit()
         cursor.close()
     except sqlite3.Error as error:
@@ -25,7 +25,7 @@ def insert_transaction(trans_data):
 
 def show_transactions():
     try:
-        transaction_retrieve_query = ('SELECT c.category, t.amount, t.trans_date from '
+        transaction_retrieve_query = ('SELECT t.transaction_name, c.category, t.amount, t.trans_date from '
                                       'transactions t, category c where t.category_id = c.category_id')
         sqliteConnection = sqlite3.connect(config.DATABASE_PATH)
         cursor = sqliteConnection.cursor()
@@ -45,8 +45,8 @@ def search_results(text):
     try:
         sqliteConnection = sqlite3.connect(config.DATABASE_PATH)
         cursor = sqliteConnection.cursor()
-        cursor.execute("SELECT c.category, t.amount, t.trans_date from "
-                       "transactions t, category c where c.category LIKE ? AND t.category_id = c.category_id",
+        cursor.execute("SELECT t.transaction_name, c.category, t.amount, t.trans_date from "
+                       "transactions t, category c where t.transaction_name LIKE ? AND t.category_id = c.category_id",
                        ('%' + text + '%',))
         record = cursor.fetchall()
         cursor.close()
@@ -131,23 +131,23 @@ def filter_transactions(period):
     try:
         sqliteConnection = sqlite3.connect(config.DATABASE_PATH)
         cursor = sqliteConnection.cursor()
-        filter_query = ('SELECT c.category, t.amount, t.trans_date from '
+        filter_query = ('SELECT t.transaction_name, c.category, t.amount, t.trans_date from '
                         'transactions t, category c where t.category_id = c.category_id and t.trans_date'
                         ' = CURRENT_DATE')
         if period == "Today":
-            filter_query = ('SELECT c.category, t.amount, t.trans_date from '
+            filter_query = ('SELECT t.transaction_name, c.category, t.amount, t.trans_date from '
                             'transactions t, category c where t.category_id = c.category_id and'
                             ' t.trans_date = CURRENT_DATE')
         elif period == "Last 7 Days":
-            filter_query = ('SELECT c.category, t.amount, t.trans_date from '
+            filter_query = ('SELECT t.transaction_name, c.category, t.amount, t.trans_date from '
                             'transactions t, category c where t.category_id = c.category_id and'
                             ' t.trans_date > DATE("now", "-7 days")')
         elif period == "Last 30 Days":
-            filter_query = ('SELECT c.category, t.amount, t.trans_date from '
+            filter_query = ('SELECT t.transaction_name, c.category, t.amount, t.trans_date from '
                             'transactions t, category c where t.category_id = c.category_id and '
                             't.trans_date > DATE("now", "-30 days")')
         elif period == "All":
-            filter_query = ('SELECT c.category, t.amount, t.trans_date from '
+            filter_query = ('SELECT t.transaction_name, c.category, t.amount, t.trans_date from '
                             'transactions t, category c where t.category_id = c.category_id')
         cursor.execute(filter_query)
         record = cursor.fetchall()
@@ -162,7 +162,7 @@ def filter_transactions(period):
 
 def export_transactions():
     try:
-        transaction_retrieve_query = ('SELECT c.category, t.amount, t.trans_date from '
+        transaction_retrieve_query = ('SELECT t.transaction_name,c.category, t.amount, t.trans_date from '
                                       'transactions t, category c where t.category_id = c.category_id')
         sqliteConnection = sqlite3.connect(config.DATABASE_PATH)
         cursor = sqliteConnection.cursor()
